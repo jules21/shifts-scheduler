@@ -32,8 +32,10 @@
     <div class="scrollbar-sidebar ps">
        <div class="app-sidebar__inner">
           <ul class="vertical-nav-menu metismenu">
-              {{-- Employee links --}}
-             <li class="app-sidebar__heading">Dashboard</li>
+               <p class="text-center app-sidebar__heading " style="margin-bottom:-30px;">Dashboard</p>
+             {{-- <li class="app-sidebar__heading">Dashboard</li> --}}
+             <img src="{{ url('assets/img/logo2/image2.png') }}" alt="logo" class="img-fluid">
+             {{-- Employee links --}}
              <li class="mm-active">
                 <a href="#" aria-expanded="true">
                 <i class="metismenu-icon pe-7s-diamond"></i>

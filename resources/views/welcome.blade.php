@@ -4,16 +4,16 @@
 
 @section('content')
 
-<div class="col-md-8 col-lg-6 col-xl-5 mx-auto mt-4" id="login">
+<div class="col-md-8 col-lg-6 col-xl-5 mx-auto" id="login">
     <div class="text-center">
-        <img src="{{ url('assets/img/app-logo.png') }}" alt="{{ config('app.name') }}" height="50" class="mb-5">
+        <img src="{{ url('assets/img/logo2/image2.png') }}" alt="{{ config('app.name') }}" height="200">
     </div>
     <div class="row">
         <div class="col-sm-8">
             
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">

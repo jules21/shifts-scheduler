@@ -16,7 +16,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -36,4 +36,51 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // opt#1
+    //     public function login(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'email'           => 'required|max:255|email',
+    //         'password'           => 'required|confirmed',
+    //     ]);
+    //     if (Auth::attempt(['email' => $email, 'password' => $password])) {
+    //         // Success
+    //         return redirect()->intended('/panel');
+    //     } else {
+    //         // Go back on error (or do what you want)
+    //         return redirect()->back();
+    //     }
+
+// }
+
+    // opt#2
+    // protected function credentials(Request $request)
+    // {
+    //     $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
+    //     ? $this->username()
+    //     : 'username';
+
+    //     return [
+    //         $field => $request->get($this->username()),
+    //         'password' => $request->password,
+    //     ];
+    // }
+
+//     validation
+    //     public function login(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'email'           => 'required|max:255|email',
+    //         'password'           => 'required|confirmed',
+    //     ]);
+    //     if (Auth::attempt(['email' => $email, 'password' => $password])) {
+    //         // Success
+    //         return redirect()->intended('/panel');
+    //     } else {
+    //         // Go back on error (or do what you want)
+    //         return redirect()->back();
+    //     }
+
+// }
 }

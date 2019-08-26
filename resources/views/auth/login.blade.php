@@ -4,12 +4,12 @@
 
 @section('content')
 
-<div class="col-md-8 col-lg-6 col-xl-5 mx-auto mt-4" id="login">
+<div class="col-md-8 col-lg-6 col-xl-5 mx-auto " id="login">
     <div class="text-center">
-        <img src="{{ url('assets/img/app-logo.png') }}" alt="{{ config('app.name') }}" height="50">
+        <img src="{{ url('assets/img/logo2/image2.png') }}" alt="{{ config('app.name') }}" height="200">
     </div>
 
-    <div class="card mt-4">
+    <div class="card ">
         <div class="card-body">
             <div class="p-4">
                 @include('partials.messages')
@@ -18,7 +18,9 @@
                         @csrf
                     <div class="form-group">
                         <label for="username" class="sr-only">E-mail or username</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email Address" required autocomplete="email" autofocus>
+                            <input id="username" type="text" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('email') }}" placeholder="Email Address" required autocomplete="email" autofocus>
+
+                            {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email Address" required autocomplete="email" autofocus> --}}
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
