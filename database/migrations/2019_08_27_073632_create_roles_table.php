@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkHoursTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateWorkHoursTable extends Migration
      */
     public function up()
     {
-        Schema::create('work_hours', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->unsignedInteger('shift_id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateWorkHoursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_hours');
+        Schema::dropIfExists('roles');
     }
 }

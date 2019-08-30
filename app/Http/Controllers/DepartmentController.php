@@ -14,7 +14,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Department::paginate(5);
+        // dd($departments);
+        return view('departments.index', compact('departments'));
     }
 
     /**
@@ -24,7 +26,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        $edit = false;
+        return view('departments.create', compact('edit'));
     }
 
     /**
@@ -35,7 +38,13 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newDepartment = Department::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+        if ($newDepartment) {
+            return redirect()->route('manager.departments.index')->with('success', 'new Department Added Successful');
+        }
     }
 
     /**
@@ -57,7 +66,9 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        $edit = true;
+        $department = Department::find($department->id);
+        return view('departments.create', compact('edit','department'));
     }
 
     /**
@@ -69,7 +80,15 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $department = Department::find($department->id);
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+
+        if ($department->save()) {
+            return redirect()->route('manager.departments.index')->with('success', 'Department Updated Successful');
+        }else {
+            return back()->withInput();
+        }
     }
 
     /**
@@ -80,6 +99,12 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $department = Department::find($department->id);
+
+        if ($department->delete()) {
+            return redirect()->route('manager.departments.index')->with('success', 'Department deleted Successful');
+        }else {
+            return back()->withInput();
+        }
     }
 }

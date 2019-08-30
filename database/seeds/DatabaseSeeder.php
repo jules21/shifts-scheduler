@@ -12,5 +12,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(EmployeeSeedTable::class);
+        $this->call(DepartmentSeedTable::class);
+        $this->call(PositionSeedTable::class);
+        $this->call(RoleSeedTable::class);
+        $this->call(ShiftSeedTable::class);
+        $this->call(WorkHourSeedTable::class);
+        $this->call(WorkDaySeedTable::class);
     }
 }

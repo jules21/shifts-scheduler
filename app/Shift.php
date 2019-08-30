@@ -15,4 +15,8 @@ class Shift extends Model
     {
         $this->belongsTo('App\User');
     }
+    public function workHours()
+    {
+        $this->hasMany('App\WorkHour');
+    }
 }

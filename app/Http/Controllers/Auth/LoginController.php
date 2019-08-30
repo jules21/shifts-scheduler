@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,16 +26,71 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    public function redirectTo()
+    {
+        // Check user role
+        switch (Auth::user()->role->name) {
+            case 'manager':
+                return '/manager/dashboard';
+                break;
+
+            case 'employee':
+                return '/user/dashboard';
+                break;
+
+            default:
+                return '/home';
+                break;
+        }
+
+    }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+    /**
+     * Login username to be used by the controller.
+     *
+     * @var string
+     */
+    protected $username;
+
+    /**
+     * Create a new controller instance.
+     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+        $this->username = $this->findUsername();
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function findUsername()
+    {
+        $login = request()->input('login');
+
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        request()->merge([$fieldType => $login]);
+
+        return $fieldType;
+    }
+
+    /**
+     * Get username property.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->username;
     }
 
     // opt#1

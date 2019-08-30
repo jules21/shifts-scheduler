@@ -11,11 +11,24 @@
 |
  */
 
+use App\Http\Controllers\EmployeeController;
+
 Route::get('/admin', function () {
     return view('layouts.master');
 });
 Route::get('/', function () {
     return view('welcome');
+});
+
+// manager routes
+Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth'], function () {
+    Route::get('dashboard', 'DashboardController@managerDashboard')->name('dashboard');
+    Route::resource('departments', 'DepartmentController');
+    Route::resource('employees', 'EmployeeController');
+});
+// user routes
+Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => 'auth'], function () {
+    Route::get('dashboard', 'DashboardController@userDashboard')->name('dashboard');
 });
 
 Auth::routes();

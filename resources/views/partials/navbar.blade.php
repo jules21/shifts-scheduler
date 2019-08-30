@@ -30,7 +30,27 @@
        </span>
     </div>
     <div class="app-header__content">
-       <div class="app-header-left"></div>
+       {{-- app header left --}}
+       <div class="row ml-2">
+            <div class="col-lg-12 d-flex align-items-center py-3">
+                <h4 class="page-header mb-0">
+                    @yield('page-heading')  
+                </h4>
+                &nbsp; |  &nbsp;
+                <ol class="list-inline mb-0 font-weight-light">
+                    &nbsp;
+                    <li class="list-inline-item">
+                        <a href="{{ url('/') }}" class="text-muted">
+                            <i class="fa fa-home"></i>
+                        </a>
+                        / &nbsp;  home
+                    </li> 
+                    
+                    @yield('breadcrumbs') 
+                </ol>
+            </div>
+        </div>
+       {{-- app header left  end here!--}}
        <div class="app-header-right">
           <!-- user profile  -->
           <div class="header-btn-lg pr-0">
@@ -39,25 +59,31 @@
                    <div class="widget-content-left">
                       <div class="btn-group">
                          <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                         <img width="42" class="rounded-circle" src="{{ asset('dashboard/assets/images/avatars/1.jpg') }}" alt="">
+                         <img width="42" class="rounded-circle" src="{{ asset('assets/img/profile.png') }}" alt="">
                          <i class="fa fa-angle-down ml-2 opacity-8"></i>
                          </a>
                          <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                            <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                            <button type="button" tabindex="0" class="dropdown-item">Actions</button>
+                            <button type="button" tabindex="0" class="dropdown-item">User Profile</button>
                             <div tabindex="-1" class="dropdown-divider"></div>
-                            <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+                            <a tabindex="0" href="{{ route('logout') }}" class="dropdown-item"onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                           </a>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                 @csrf
+                             </form>
                          </div>
                       </div>
                    </div>
                    <div class="widget-content-left  ml-3 header-user-info">
                       <div class="widget-heading">
-                         Alina Mclourd
+                         Mr 
+                         {{Auth::user()->username}}
                       </div>
                       <div class="widget-subheading">
-                         VP People Manager
+                         @auth
+                             {{Auth::user()->role->name}}
+                         @endauth
                       </div>
                    </div>
                 </div>

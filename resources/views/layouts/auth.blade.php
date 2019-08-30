@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield('page-title') - {{ config('app.name') }}</title>
-    
+    <link rel="icon shortcut" href="{{ asset('assets/img/logo2/image2.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-all.min.css') }}">
 

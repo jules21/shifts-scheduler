@@ -18,15 +18,14 @@
                         @csrf
                     <div class="form-group">
                         <label for="username" class="sr-only">E-mail or username</label>
-                            <input id="username" type="text" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('email') }}" placeholder="Email Address" required autocomplete="email" autofocus>
 
-                            {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email Address" required autocomplete="email" autofocus> --}}
+                        <input id="email" type="login" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" name="login" value="{{ old('username') ?: old('email') }}" placeholder="E-mail or username" required autocomplete="email" autofocus>
 
-                            @error('email')
+                            @if ($errors->has('username') || $errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{-- $message --}}</strong>
+                                    <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
                                 </span>
-                            @enderror
+                                @endif
                         </div>
                        
                     <div class="form-group password-field">

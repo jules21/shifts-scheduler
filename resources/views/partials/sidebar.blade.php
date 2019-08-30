@@ -44,13 +44,13 @@
                 </a>
                 <ul class="mm-collapse mm-show" style="">
                    <li>
-                      <a href="elements-buttons-standard.html">
+                      <a href="{{ route('manager.employees.create') }}">
                       <i class="metismenu-icon"></i>
                       Add New Employee
                       </a>
                    </li>
                    <li>
-                      <a href="elements-dropdowns.html">
+                      <a href="{{ route('manager.employees.index') }}">
                       <i class="metismenu-icon"></i>show All
                       </a>
                    </li>
@@ -66,13 +66,13 @@
                 </a>
                 <ul class="mm-collapse mm-show" style="">
                    <li>
-                      <a href="elements-buttons-standard.html">
+                      <a href="{{ route('manager.departments.create') }}">
                       <i class="metismenu-icon"></i>
                       Add New Department
                       </a>
                    </li>
                    <li>
-                      <a href="elements-dropdowns.html">
+                      <a href="{{ route('manager.departments.index') }}">
                       <i class="metismenu-icon"></i>show All
                       </a>
                    </li>
