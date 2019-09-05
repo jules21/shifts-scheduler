@@ -12,11 +12,11 @@ class Department extends Model
 
     public function positions()
     {
-        $this->hasMany('App\Position');
+        return $this->hasMany('App\Position');
     }
     //
     public function users()
     {
-        $this->hasMany('App\User');
+        return $this->hasMany('App\User');
     }
 }

@@ -31,7 +31,8 @@
     </div>
     <div class="scrollbar-sidebar ps">
        <div class="app-sidebar__inner">
-          <ul class="vertical-nav-menu metismenu">
+         @if (Auth::user()->role->name == 'manager')
+         <ul class="vertical-nav-menu metismenu">
                <p class="text-center app-sidebar__heading " style="margin-bottom:-30px;">Dashboard</p>
              {{-- <li class="app-sidebar__heading">Dashboard</li> --}}
              <img src="{{ url('assets/img/logo2/image2.png') }}" alt="logo" class="img-fluid">
@@ -79,6 +80,28 @@
 
                 </ul>
              </li>
+             {{-- Position links --}}
+             <li class="mm-active">
+                <a href="#" aria-expanded="true">
+                <i class="metismenu-icon pe-7s-diamond"></i>
+                Department Posts
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+                <ul class="mm-collapse mm-show" style="">
+                   <li>
+                      <a href="{{ route('manager.positions.create') }}">
+                      <i class="metismenu-icon"></i>
+                      Add Post
+                      </a>
+                   </li>
+                   <li>
+                      <a href="{{ route('manager.positions.index') }}">
+                      <i class="metismenu-icon"></i>show All
+                      </a>
+                   </li>
+
+                </ul>
+             </li>
              {{-- Time table links --}}
              <li class="mm-active">
                     <a href="#" aria-expanded="true">
@@ -102,6 +125,45 @@
                     </ul>
                  </li>
           </ul>
+         @else
+         <ul class="vertical-nav-menu metismenu">
+               <p class="text-center app-sidebar__heading " style="margin-bottom:-30px;">Dashboard</p>
+             {{-- <li class="app-sidebar__heading">Dashboard</li> --}}
+             <img src="{{ url('assets/img/logo2/image2.png') }}" alt="logo" class="img-fluid">
+             {{-- profile links --}}
+             <li class="mm-active">
+                <a href="{{ route('manager.employees.show', Auth::user()->id) }}" aria-expanded="true" class="text-center">
+                Profile 
+                </a>
+             </li>
+             {{-- Timetable links --}}
+             <li class="mm-active">
+                <a href="#" aria-expanded="true">
+                <i class="metismenu-icon pe-7s-diamond"></i>
+                Shift Schedule
+                </a>
+             </li>
+
+             {{-- Timetable links --}}
+             <li class="mm-active">
+                <a href="#" aria-expanded="true">
+                <i class="metismenu-icon pe-7s-diamond"></i>
+                Shift switching
+                </a>
+             </li>
+
+             {{-- Timetable links --}}
+             {{-- <li class="mm-active">
+                <a href="#" aria-expanded="true">
+                <i class="metismenu-icon pe-7s-diamond"></i>
+                Shift Schedule
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+             </li> --}}
+
+          </ul>
+        
+         @endif
        </div>
     </div>
  </div>

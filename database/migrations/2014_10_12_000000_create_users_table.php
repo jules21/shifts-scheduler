@@ -21,12 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->date('birthday')->nullable();
-            $table->string('phone')->nullable();
+            // $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
 
             $table->integer('role_id')->unsigned()->default(2);
             $table->unsignedInteger('department_id');
+            $table->unsignedInteger('position_id');
             // $table->unsignedInteger('shift_id');
 
             $table->timestamp('email_verified_at')->nullable();

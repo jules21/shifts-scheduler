@@ -42,7 +42,7 @@
 </div>
 <div class="jumbotron jumbotron-fluid card" style="background-color:white">
   <div class="container text-center">
-    <h1 class="display-4" style="color: #179970;">EMPLOYEE SHIFTS SCHEDULER SYSTEM</h1>
+    <h1 class="display-4" style="color: #179970;">SHIFTS SCHEDULER SYSTEM</h1>
 
   </div>
 </div>

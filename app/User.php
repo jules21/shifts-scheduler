@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -39,7 +38,7 @@ class User extends Authenticatable
     ];
     public function role()
     {
-        return $this->belongsTo('App\Role', 'id');
+        return $this->belongsTo('App\Role', 'role_id');
     }
     public function shifts()
     {
@@ -47,8 +46,11 @@ class User extends Authenticatable
     }
     public function department()
     {
-        $this->belongsTo('App\Department');
+        return $this->belongsTo('App\Department');
     }
-
+    public function position()
+    {
+        return $this->belongsTo('App\Position');
+    }
 
 }

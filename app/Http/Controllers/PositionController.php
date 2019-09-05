@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Position;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::paginate(5);
+        // dd($positions);
+        return view('positions.index', compact('positions'));
     }
 
     /**
@@ -24,7 +27,9 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+        $edit = false;
+        return view('positions.create', compact('edit', 'departments'));
     }
 
     /**
@@ -35,7 +40,15 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $newDepartment = Position::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'department_id' => $request->input('department_id'),
+        ]);
+        if ($newDepartment) {
+            return redirect()->route('manager.positions.index')->with('success', 'new Department Post Added Successful');
+        }
     }
 
     /**
@@ -57,7 +70,10 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        $departments = Department::all();
+        $edit = true;
+        $position = Position::find($position->id);
+        return view('positions.create', compact('edit', 'departments','position'));
     }
 
     /**
@@ -69,7 +85,16 @@ class PositionController extends Controller
      */
     public function update(Request $request, Position $position)
     {
-        //
+        $position = Position::find($position->id);
+        $position->name = $request->input('name');
+        $position->description = $request->input('description');
+        $position->department_id = $request->input('department_id');
+
+        if ($department->save()) {
+            return redirect()->route('manager.departments.index')->with('success', 'Department Updated Successful');
+        }else {
+            return back()->withInput();
+        }
     }
 
     /**
@@ -80,6 +105,12 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        $position = Position::find($position->id);
+
+        if ($position->delete()) {
+            return redirect()->route('manager.positions.index')->with('success', 'Department Post deleted Successful');
+        }else {
+            return back()->withInput();
+        }
     }
 }

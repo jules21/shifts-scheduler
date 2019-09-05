@@ -63,7 +63,7 @@
                          <i class="fa fa-angle-down ml-2 opacity-8"></i>
                          </a>
                          <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                            <button type="button" tabindex="0" class="dropdown-item">User Profile</button>
+                            <a href="{{ route('manager.employees.show', Auth::user()->id) }}" tabindex="0" class="dropdown-item">User Profile</a>
                             <div tabindex="-1" class="dropdown-divider"></div>
                             <a tabindex="0" href="{{ route('logout') }}" class="dropdown-item"onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

@@ -38,9 +38,8 @@
          </div>
       </div>
       <script type="text/javascript" src="{{ asset('dashboard/assets/scripts/main.js') }}"></script>
-      <script src="{{ asset('assets/js/as/btn.js') }}"></script>
-      <script src="{{ asset('assets/js/vendor.js') }}"></script>
-      <script src="{{ asset('assets/js/as/app.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+      <script src="{{ asset('js/custom.js') }}"></script>
       @yield('scripts')
    </body>
 </html>

@@ -19,12 +19,14 @@ Route::get('/admin', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('states/get/{id}', 'EmployeeController@getMembership');
 
 // manager routes
 Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@managerDashboard')->name('dashboard');
     Route::resource('departments', 'DepartmentController');
     Route::resource('employees', 'EmployeeController');
+    Route::resource('positions', 'PositionController');
 });
 // user routes
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => 'auth'], function () {

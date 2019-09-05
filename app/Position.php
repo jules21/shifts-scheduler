@@ -6,16 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Position extends Model
 {
+    
+    protected $guarded = ['id'];
+    
     public function user()
     {
-        $this->belongsTo('App\User');
+        return $this->hasOne('App\Position');
     }
     public function department()
     {
-        $this->belongsTo('App\Department');
+       return $this->belongsTo('App\Department');
     }
     public function workHours()
     {
-        $this->hasMany('App\WorkHour');
+        return $this->hasMany('App\WorkHour');
     }
+
 }
