@@ -18,9 +18,7 @@
                   <!-- page title -->
                   <div class="app-page-title">
                      <div class="page-title-wrapper">
-                        <div class="page-title-heading">
-                   
-                        </div>
+                        @yield('subtitle')
                      </div>
                   </div>
                   <!-- page content goes here -->

@@ -11,19 +11,32 @@
 |
  */
 
-use App\Http\Controllers\EmployeeController;
+Route::get('/shifts', 'ShiftsController@do')->name('shift');
+Route::get('/calendar', 'ShiftsController@build_calendar')->name('calendar');
+Route::get('/go', 'ShiftsController@doCalendars')->name('calendarr');
+Route::get('/try', 'ShiftsController@print_timetable')->name('calendart');
+Route::get('/timetables', 'ShiftsController@real_timetable')->name('calendary');
 
 Route::get('/admin', function () {
     return view('layouts.master');
 });
 Route::get('/', function () {
+    if (Auth::check()) {
+        if (Auth::user()->role->name == 'manager') {
+            return redirect('/manager/dashboard');
+        } else {
+            return redirect('/user/dashboard');
+        }
+    }
     return view('welcome');
 });
 Route::get('states/get/{id}', 'EmployeeController@getMembership');
 
+Route::get('timetable', 'DashboardController@timetable')->name('timetable');
 // manager routes
 Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@managerDashboard')->name('dashboard');
+    Route::get('timetable', 'DashboardController@timetable')->name('timetable');
     Route::resource('departments', 'DepartmentController');
     Route::resource('employees', 'EmployeeController');
     Route::resource('positions', 'PositionController');
@@ -31,6 +44,7 @@ Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth']
 // user routes
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@userDashboard')->name('dashboard');
+    Route::resource('leaves', 'LeaveController');
 });
 
 Auth::routes();

@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-6">
+        @if (Auth::user()->role_id == 1)
         <div class="form-group">
             <label for="role">Department</label>
             <select class="form-control @error('department_id') is-invalid @enderror" id="category" name="department_id" aria-invalid="false" aria-describedby="roles-error" required>
@@ -14,6 +15,7 @@
             </span>
             @enderror
         </div>
+        @endif
         <div class="form-group">
             <label for="first_name">First Name</label>
             <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{ $edit ? $user->first_name : '' }}">
@@ -25,6 +27,7 @@
     </div>
 
     <div class="col-md-6">
+        @if ((Auth::user()->role_id == 1))            
         <div class="form-group">
             <label for="status">Post[position]</label>
             <select class="form-control @error('position_id') is-invalid @enderror" id="membership" name="position_id" required>
@@ -39,6 +42,7 @@
             </span>
             @enderror
         </div>
+        @endif
         <div class="form-group">
             <label for="birthday">Date of Birth</label>
             <div class="form-group">

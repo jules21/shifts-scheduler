@@ -52,5 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Position');
     }
+    public function timetables()
+    {
+        return $this->hasMany('App\Timetable');
+    }
 
 }

@@ -104,25 +104,11 @@
              </li>
              {{-- Time table links --}}
              <li class="mm-active">
-                    <a href="#" aria-expanded="true">
+                    <a href="{{ route('manager.timetable') }}" aria-expanded="true">
                     <i class="metismenu-icon pe-7s-diamond"></i>
                     TimeTable
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
-                    <ul class="mm-collapse mm-show" style="">
-                       <li>
-                          <a href="elements-buttons-standard.html">
-                          <i class="metismenu-icon"></i>
-                          Add New Schedule
-                          </a>
-                       </li>
-                       <li>
-                          <a href="elements-dropdowns.html">
-                          <i class="metismenu-icon"></i>show All
-                          </a>
-                       </li>
-    
-                    </ul>
                  </li>
           </ul>
          @else
@@ -152,14 +138,28 @@
                 </a>
              </li>
 
-             {{-- Timetable links --}}
-             {{-- <li class="mm-active">
-                <a href="#" aria-expanded="true">
-                <i class="metismenu-icon pe-7s-diamond"></i>
-                Shift Schedule
-                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-             </li> --}}
+             {{-- Leave links --}}
+             <li class="mm-active">
+                  <a href="#" aria-expanded="true">
+                  <i class="metismenu-icon pe-7s-diamond"></i>
+                  Department Posts
+                  <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                  </a>
+                  <ul class="mm-collapse mm-show" style="">
+                     <li>
+                        <a href="{{ route('user.leaves.create') }}">
+                        <i class="metismenu-icon"></i>
+                        make request
+                        </a>
+                     </li>
+                     <li>
+                        <a href="{{ route('user.leaves.index') }}">
+                        <i class="metismenu-icon"></i>view leave status
+                        </a>
+                     </li>
+  
+                  </ul>
+               </li>
 
           </ul>
         
