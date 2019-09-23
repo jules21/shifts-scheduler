@@ -185,7 +185,7 @@
                   </ul>
                </li>
                {{-- Switch Shift links --}}
-               <li class="mm-active">
+               {{-- <li class="mm-active">
                      <a href="#" aria-expanded="true">
                      <i class="metismenu-icon pe-7s-diamond"></i>
                      switch shift request
@@ -205,7 +205,7 @@
                         </li>
    
                      </ul>
-                  </li>
+                  </li> --}}
 
           </ul>
         

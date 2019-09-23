@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->unsigned()->default(2);
             $table->unsignedInteger('department_id');
             $table->unsignedInteger('position_id');
-            // $table->unsignedInteger('shift_id');
+            $table->unsignedInteger('index')->default(1);
 
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

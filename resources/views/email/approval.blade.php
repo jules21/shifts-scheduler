@@ -350,7 +350,7 @@
                     <tr>
                       <td>
                         <p>Dear {{$data['username']}},</p>
-                        <p>Your request have been accepted and {{$data['status'] == 'approved' ? 'Approved' : 'Cancelled'}}! </p>
+                        <p>Your request have been received and {{$data['status'] == 'approved' ? 'Approved' : 'Cancelled'}}! </p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>

@@ -20,7 +20,8 @@ Route::get('/go', 'ShiftsController@doCalendars')->name('calendarr');
 Route::get('/users', 'ShiftsController@getUser')->name('calesndary');
 
 Route::get('/employee', 'TimeTableController@create')->name('choose.department');
-Route::post('/employee', 'TimeTableController@store')->name('gentimetable');
+// Route::post('/employee', 'TimeTableController@store')->name('gentimetable');
+Route::post('/employee', 'ShiftsController@getUser')->name('gentimetable');
 
 Route::get('/admin', function () {
     return view('layouts.master');
