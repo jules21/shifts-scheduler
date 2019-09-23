@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Calendar;
 use App\TimeTable;
 use DB;
+use Illuminate\Http\Request;
 
 class ShiftsController extends Controller
 {
@@ -24,7 +25,7 @@ class ShiftsController extends Controller
         //     print $row2 = $row['day'.$j];
         // }
         foreach ($array as $row) {
-            for ($i = 1; $i <= 3; $i++) {
+            for ($i = 1; $i <= 4; $i++) {
                 $row['employee_id'] = $i;
                 $b = $a;
                 for ($j = 1; $j <= 7; $j++) {
@@ -364,17 +365,55 @@ class ShiftsController extends Controller
                 'currentDay' => $currentDay,
             ]);
     }
-    public function getUser()
+    public function getUser(Request $request)
     {
+        $this->print_timetable();
+
         $assigned = DB::table('time_tables')->get();
-        $array = json_decode(json_encode($assigned), true);
+        // $array = json_decode(json_encode($assigned), true);
+        $array = TimeTable::all();
 
-        $users = User::where('position_id', 3)->limit(3)->get()->toArray();
+        $dateComponents = getdate();
 
-        // foreach ($users as $user) {
-        //     print_r($user['id']);
-        // }
+        $month = $dateComponents['mon'];
+        $year = $dateComponents['year'];
 
+        // Create array containing abbreviations of days of week.
+        $daysOfWeek = array('S', 'M', 'T', 'W', 'T', 'F', 'S');
+
+        // What is the first day of the month in question?
+        $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
+
+        // How many days does this month contain?
+        $numberDays = date('t', $firstDayOfMonth);
+
+        // Retrieve some information about the first day of the
+        // month in question.
+        $dateComponents = getdate($firstDayOfMonth);
+
+        // What is the name of the month in question?
+        $monthName = $dateComponents['month'];
+
+        // What is the index value (0-6) of the first day of the
+        // month in question.
+        $dayOfWeek = $dateComponents['wday'];
+
+        $currentDay = 1;
+
+        return view('realtimetable2',
+            [
+                'array' => $array,
+                'month' => $month,
+                'year' => $year,
+                'daysOfWeek' => $daysOfWeek,
+                'firstDayOfMonth' => $firstDayOfMonth,
+                'numberDays' => $numberDays,
+                'dateComponents' => $dateComponents,
+                'monthName' => $monthName,
+                'dayOfWeek' => $dayOfWeek,
+                'currentDay' => $currentDay,
+                'position_id' => $request->input('position_id'),
+            ]);
     }
 
 }

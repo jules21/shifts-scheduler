@@ -126,7 +126,7 @@
                                         // echo $worker['worker'].":".$shift['shift']."<br>";
                                         // $calendar .= $worker['worker'] . " : " . $shift['shift'] . "<br>";
                                         // $calendar .=\App\User::find($worker['worker'])->username. " : " . \App\Shift::find($shift['shift'])->abbr . "<br>";
-                                        $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::where('index',$worker['worker'])->where('position_id', 4)->value('username') . "<br>";
+                                        $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::where('index',$worker['worker'])->where('position_id', $position_id)->value('username') . "<br>";
                                     }
                                 }
                                 // end here

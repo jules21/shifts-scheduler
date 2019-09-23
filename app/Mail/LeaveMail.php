@@ -28,7 +28,7 @@ class LeaveMail extends Mailable
      */
     public function build()
     {
-        $subject = 'Leave Request Approved at Hotel Villa';
+        $subject = 'Leave Request Response at Hotel Villa';
         $content = $this->messages;
         $data = [
             'subject' => $subject,

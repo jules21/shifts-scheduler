@@ -111,7 +111,7 @@ class LeaveController extends Controller
             ];
 
             Mail::to($user->email)->send(new LeaveMail($messages));
-            return redirect()->routes('user.leaves.index')->with('success', 'request canceled, check your email for more info.');
+            return redirect()->route('user.leaves.index')->with('success', 'request canceled, check your email for more info.');
         } else {
             return redirect()->back()->with('error', 'something went wrong, Please try again');
         }

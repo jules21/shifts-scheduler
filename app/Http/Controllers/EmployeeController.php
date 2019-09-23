@@ -61,6 +61,15 @@ class EmployeeController extends Controller
             // 'position_id' => 'required',
         ]);
 
+        $users = User::where('position_id', $request->input('position_id'))->orderBy('id', 'desc')->first();
+        $index;
+        if ($users->index < 4) {
+            $index = $users->index + 1;
+        } else {
+            $index = 1;
+        }
+        // dd($index);
+
         $user = User::create([
             'email' => $request->input('email'),
             'username' => $request->input('username'),
@@ -71,6 +80,7 @@ class EmployeeController extends Controller
             'address' => $request->input('address'),
             'department_id' => $request->input('department_id'),
             'position_id' => $request->input('position_id'),
+            'index' => $index,
         ]);
 
         if ($user) {
