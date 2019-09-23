@@ -44,8 +44,6 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-150">Email</th>
-                        <th class="min-width-150">username</th>
                         <th class="min-width-150">Date</th>
                         <th>Reasom</th>
                         <th class="">status</th>
@@ -56,8 +54,6 @@
                         @if (count($leaves))
                             @foreach ($leaves as $leave)
                                 <tr>
-                                    <td>{{ $leave->user->email }}</td>
-                                    <td>{{ $leave->user->username }}</td>
                                     <td>{{ $leave->day }}</td>
                                     <td>
                                         {{ $leave->description }}
@@ -70,10 +66,6 @@
                                         <a href="{{ route('user.leaves.show', $leave->id) }}" class="btn btn-icon"
                                                 title="approve leave" data-toggle="tooltip" data-placement="top">
                                                  <i class="fas fa-check"></i>
-                                             </a>
-                                        <a href="{{ route('user.leaves.edit', $leave->id) }}" class="btn btn-icon"
-                                                title="cancel leave" data-toggle="tooltip" data-placement="top">
-                                                 <i class="fas fa-times"></i>
                                              </a>
                                         @endif
                                   

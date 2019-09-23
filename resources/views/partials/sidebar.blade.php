@@ -102,13 +102,37 @@
 
                 </ul>
              </li>
+             {{-- Leave links --}}
+             <li class="mm-active">
+                <a href="{{ route('user.leaves.index') }}" aria-expanded="true">
+                <i class="metismenu-icon pe-7s-diamond"></i>
+                Leaves
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+             </li>
              {{-- Time table links --}}
              <li class="mm-active">
                     <a href="{{ route('manager.timetable') }}" aria-expanded="true">
                     <i class="metismenu-icon pe-7s-diamond"></i>
-                    TimeTable
+                    TimeTables
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
+                    <ul class="mm-collapse mm-show" style="">
+                        <li>
+                           <a href="{{ route('manager.calendary') }}">
+                                 <i class="metismenu-icon"></i>
+                                 timetable
+                              </a>
+                           </li>
+                        <li>
+                           <a href="{{ route('choose.department') }}">
+                           <i class="metismenu-icon"></i>
+                           Choose Department
+                           </a>
+                        </li>
+                  
+  
+                  </ul>
                  </li>
           </ul>
          @else
@@ -124,7 +148,7 @@
              </li>
              {{-- Timetable links --}}
              <li class="mm-active">
-                <a href="#" aria-expanded="true">
+                <a href="{{ url('timetables') }}" aria-expanded="true">
                 <i class="metismenu-icon pe-7s-diamond"></i>
                 Shift Schedule
                 </a>
@@ -142,7 +166,7 @@
              <li class="mm-active">
                   <a href="#" aria-expanded="true">
                   <i class="metismenu-icon pe-7s-diamond"></i>
-                  Department Posts
+                  Leave request
                   <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                   </a>
                   <ul class="mm-collapse mm-show" style="">
@@ -160,6 +184,28 @@
   
                   </ul>
                </li>
+               {{-- Switch Shift links --}}
+               <li class="mm-active">
+                     <a href="#" aria-expanded="true">
+                     <i class="metismenu-icon pe-7s-diamond"></i>
+                     switch shift request
+                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                     </a>
+                     <ul class="mm-collapse mm-show" style="">
+                        <li>
+                           <a href="{{ route('user.switch-shifts.create') }}">
+                           <i class="metismenu-icon"></i>
+                           make request
+                           </a>
+                        </li>
+                        <li>
+                           <a href="{{ route('user.switch-shifts.index') }}">
+                           <i class="metismenu-icon"></i>view request status
+                           </a>
+                        </li>
+   
+                     </ul>
+                  </li>
 
           </ul>
         

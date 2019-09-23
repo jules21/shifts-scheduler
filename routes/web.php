@@ -12,10 +12,15 @@
  */
 
 Route::get('/shifts', 'ShiftsController@do')->name('shift');
-Route::get('/calendar', 'ShiftsController@build_calendar')->name('calendar');
-Route::get('/go', 'ShiftsController@doCalendars')->name('calendarr');
 Route::get('/try', 'ShiftsController@print_timetable')->name('calendart');
 Route::get('/timetables', 'ShiftsController@real_timetable')->name('calendary');
+
+Route::get('/calendar', 'ShiftsController@build_calendar')->name('calendar');
+Route::get('/go', 'ShiftsController@doCalendars')->name('calendarr');
+Route::get('/users', 'ShiftsController@getUser')->name('calesndary');
+
+Route::get('/employee', 'TimeTableController@create')->name('choose.department');
+Route::post('/employee', 'TimeTableController@store')->name('gentimetable');
 
 Route::get('/admin', function () {
     return view('layouts.master');
@@ -37,6 +42,7 @@ Route::get('timetable', 'DashboardController@timetable')->name('timetable');
 Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@managerDashboard')->name('dashboard');
     Route::get('timetable', 'DashboardController@timetable')->name('timetable');
+    Route::get('/timetables', 'ShiftsController@real_timetable')->name('calendary');
     Route::resource('departments', 'DepartmentController');
     Route::resource('employees', 'EmployeeController');
     Route::resource('positions', 'PositionController');
@@ -45,6 +51,7 @@ Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth']
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@userDashboard')->name('dashboard');
     Route::resource('leaves', 'LeaveController');
+    Route::resource('switch-shifts', 'SwitchSHiftController');
 });
 
 Auth::routes();

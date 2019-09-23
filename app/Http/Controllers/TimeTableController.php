@@ -2,84 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\TimeTable;
+use App\Department;
+use App\Position;
+use App\User;
 use Illuminate\Http\Request;
 
 class TimeTableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getMembership($id)
     {
-        //
-    }
+        $memberships = Position::where("department_id", $id)->pluck("name", "id");
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        return json_encode($memberships);
+
+    }
     public function create()
     {
-        //
+        $departments = Department::all();
+        $positions = Position::all();
+        $edit = false;
+        return view('timetables.employee', compact('edit', 'departments', 'positions'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TimeTable  $timeTable
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TimeTable $timeTable)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TimeTable  $timeTable
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TimeTable $timeTable)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TimeTable  $timeTable
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TimeTable $timeTable)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TimeTable  $timeTable
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TimeTable $timeTable)
-    {
-        //
+        $users = User::where('position_id', $request->input('position_id'))->limit(3)->get()->toArray();
+        dd($users);
     }
 }

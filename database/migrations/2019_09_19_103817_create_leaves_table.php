@@ -18,6 +18,7 @@ class CreateLeavesTable extends Migration
             $table->tinyInteger('user_id');
             $table->string('day');
             $table->string('description')->nullable();
+            $table->string('reason')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });

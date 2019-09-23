@@ -36,6 +36,7 @@ class LeaveMail extends Mailable
             'day' => $content['day'],
             'description' => $content['description'],
             'username' => $content['username'],
+            'status' => $content['status'],
         ];
         return $this->subject($subject)
             ->view('email.approval', compact('data'));

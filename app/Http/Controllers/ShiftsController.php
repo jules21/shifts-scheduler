@@ -9,7 +9,8 @@ use DB;
 class ShiftsController extends Controller
 {
     function do() {
-        TimeTable::truncate();
+        // TimeTable::truncate();
+        DB::table('time_tables')->truncate();
         TimeTable::create();
 
         $assigned = DB::table('time_tables')->get();
@@ -36,7 +37,8 @@ class ShiftsController extends Controller
                 }
                 TimeTable::create($row);
                 TimeTable::where('id', 1)->delete();
-                print_r($row);
+                // print_r($row);
+                // return $this;
             }
         }
     }
@@ -151,6 +153,8 @@ class ShiftsController extends Controller
 
     public function print_timetable()
     {
+        Calendar::truncate();
+        $this->do();
         $dateComponents = getdate();
 
         $month = $dateComponents['mon'];
@@ -234,7 +238,6 @@ class ShiftsController extends Controller
                     "worker" => $row['employee_id'],
                     "shift" => $row['day' . $days],
                 ];
-
                 Calendar::create($data);
 
             }
@@ -261,7 +264,7 @@ class ShiftsController extends Controller
 
         $calendar .= "</table>";
 
-        echo $calendar;
+        // echo $calendar;
 
     }
 
@@ -314,6 +317,8 @@ class ShiftsController extends Controller
     }
     public function real_timetable()
     {
+        $this->print_timetable();
+
         $assigned = DB::table('time_tables')->get();
         // $array = json_decode(json_encode($assigned), true);
         $array = TimeTable::all();
@@ -358,6 +363,18 @@ class ShiftsController extends Controller
                 'dayOfWeek' => $dayOfWeek,
                 'currentDay' => $currentDay,
             ]);
+    }
+    public function getUser()
+    {
+        $assigned = DB::table('time_tables')->get();
+        $array = json_decode(json_encode($assigned), true);
+
+        $users = User::where('position_id', 3)->limit(3)->get()->toArray();
+
+        // foreach ($users as $user) {
+        //     print_r($user['id']);
+        // }
+
     }
 
 }

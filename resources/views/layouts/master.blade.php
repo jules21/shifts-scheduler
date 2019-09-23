@@ -28,7 +28,7 @@
                <div class="app-wrapper-footer">
                   <div class="app-footer bg-white">
                      <div class="">
-                        <p class="text-center pt-2">&copy; copyright 2019 Done By Deo Ntwari</p>
+                        <p class="text-center pt-2">&copy; copyright 2019 Done By Deo Ntwari & Mbanzabugabo Bruce</p>
                      </div>
                   </div>
                </div>

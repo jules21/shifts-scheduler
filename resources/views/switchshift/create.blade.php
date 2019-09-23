@@ -31,21 +31,16 @@
     <div class="col-6 mx-auto">
             <div class="card">
                 <div class="card-body">
-                        <h5 class="card-title">Leave Response</h5>
-                        <h3 class="display-4">Canceled</h3>
-                        <form action="{{ route('user.leaves.update', $leave->id) }}" method="POST">
+                        <h5 class="card-title">Leave Form</h5>
+                        <form action="{{ route('user.leaves.store') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="user_id" value="{{$leave->user_id}} ">
                             <div class="form-group">
                                 <label for="date">Date</label>
-                                <input type="date" name="day" id="date" class="form-control" value="{{$leave->day}}" readonly required>
+                                <input type="date" name="day" id="date" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="reason">reason</label>
-                                <textarea name="description" id="reason"  class="form-control">
-                                    
-                                </textarea>
+                                <textarea name="description" id="reason"  class="form-control"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">submit</button>
                         </div>

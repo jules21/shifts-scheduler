@@ -14,13 +14,13 @@ class EmployeeSeedTable extends Seeder
     {
         $users =
             [
-            ['id' => '1', 'username' => 'Manager', 'email' => 'manager@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '1', 'department_id' => '1', 'position_id' => '1'],
+            ['id' => '4', 'username' => 'Manager', 'email' => 'manager@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '1', 'department_id' => '1', 'position_id' => '1'],
 
             ['id' => '2', 'username' => 'employee', 'email' => 'employee@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '3'],
 
-            ['id' => '3', 'username' => 'employee2', 'email' => 'employee2@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '3'],
+            ['id' => '1', 'username' => 'employee2', 'email' => 'employee2@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '3'],
 
-            ['id' => '4', 'username' => 'employee3', 'email' => 'employee3@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '3'],
+            ['id' => '3', 'username' => 'employee3', 'email' => 'employee3@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '3'],
 
             ['id' => '5', 'username' => 'employee4', 'email' => 'employee4@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '4'],
 

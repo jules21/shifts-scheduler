@@ -15,8 +15,14 @@
                         <i class="metismenu-icon pe-7s-display2"></i>
                 </i>
             </div>
-            <div>Manager Dashboard
-                <div class="page-title-subheading">This is Manager dashboard To Manager and control system.
+            <div>
+                @if (Auth::user()->role_id ==1)
+                    Manager
+            @endif Dashboard
+                <div class="page-title-subheading">
+                        <p>
+                                M stands for morning |    E stands for evening |    N stands for noon
+                            </p>
                 </div>
                 
             </div>
@@ -27,7 +33,8 @@
 @section('content')
 
 @include('partials.messages')
-<a href="{{ route('manager.timetable')}}" class="btn btn-block btn-dark mb-4">Re-generate</a>
+{{-- <a href="{{ route('manager.timetable')}}" class="btn btn-block btn-dark mb-4">Re-generate</a> --}}
+
 <div class="card">
     
         <div class="card-body">
@@ -117,7 +124,9 @@
                                     foreach ($shifts as  $shift) 
                                     {
                                         // echo $worker['worker'].":".$shift['shift']."<br>";
-                                        $calendar .= $worker['worker'] . " : " . $shift['shift'] . "<br>";
+                                        // $calendar .= $worker['worker'] . " : " . $shift['shift'] . "<br>";
+                                        // $calendar .=\App\User::find($worker['worker'])->username. " : " . \App\Shift::find($shift['shift'])->abbr . "<br>";
+                                        $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::find($worker['worker'])->username . "<br>";
                                     }
                                 }
                                 // end here

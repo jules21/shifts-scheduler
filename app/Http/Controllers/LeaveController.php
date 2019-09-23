@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Calendar;
 use App\Leave;
 use App\Mail\LeaveMail;
 use App\User;
@@ -18,14 +19,13 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->id == 1) {
+        if (Auth::user()->role_id == 1) {
             $leaves = Leave::all();
             return view('leave.index', compact('leaves'));
         }
         $leaves = Leave::where('user_id', Auth::user()->id)->get();
         return view('leave.index', compact('leaves'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -36,12 +36,6 @@ class LeaveController extends Controller
         return view('leave.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $leave = Leave::create([
@@ -58,54 +52,69 @@ class LeaveController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $leave = Leave::find($id);
-        $leave->status = "approved";
-        $user = User::find($leave->user_id);
+        // dd($leave->day);
+        $timestamp = strtotime($leave->day);
 
+        $day = date('d', $timestamp);
+        $pick = Calendar::where('day', $day)->where('worker', $leave->user_id)->first();
+        if ($pick->shift == 1) {
+            $leave->status = "approved";
+            $leave->save();
+            return redirect()->back()->with('success', 'that day is already off');
+        } else {
+            $pick->shift == 1;
+            if ($pick->save()) {
+                $leave->status = "approved";
+                $user = User::find($leave->user_id);
+
+                if ($leave->save()) {
+                    $messages = [
+                        "email" => $user->email,
+                        "username" => $user->username,
+                        "day" => $leave->day,
+                        "description" => $leave->description,
+                    ];
+
+                    Mail::to($user->email)->send(new LeaveMail($messages));
+                    return redirect()->back()->with('success', 'request approved');
+                } else {
+                    return redirect()->back()->with('error', 'something went wrong, Please try again');
+                }
+            }
+        }
+        // echo $day;
+
+    }
+
+    public function edit($id)
+    {
+        $leave = Leave::find($id);
+        return view('leave.edit', compact('leave'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $leave = Leave::find($id);
+        $leave->reason = $request->input('description');
+        $leave->status = 'canceled';
         if ($leave->save()) {
+            $user = User::find($leave->user_id);
             $messages = [
                 "email" => $user->email,
                 "username" => $user->username,
                 "day" => $leave->day,
                 "description" => $leave->description,
+                "status" => $leave->status,
             ];
 
             Mail::to($user->email)->send(new LeaveMail($messages));
-            return redirect()->back()->with('success', 'request approved');
+            return redirect()->routes('user.leaves.index')->with('success', 'request canceled, check your email for more info.');
         } else {
             return redirect()->back()->with('error', 'something went wrong, Please try again');
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Leave $leave)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Leave $leave)
-    {
-        //
     }
 
     /**
