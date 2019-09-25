@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Calendar;
 use App\TimeTable;
+use App\User;
 use DB;
 use Illuminate\Http\Request;
 
@@ -415,5 +416,42 @@ class ShiftsController extends Controller
                 'position_id' => $request->input('position_id'),
             ]);
     }
+    public static function swapShift($id, $position)
+    {
+        $users = User::where('index', '!=', $id)->where('position_id', $position)->orderBy('index', 'asc')->get();
+        // dd($users);
+        // $user = User::find($id);
+        // $index;
 
+        // if ($user->index < 4) {
+        //     $index = $user->index + 1;
+        // } else {
+        //     $index = 1;
+        // }
+        // $user->index = $index;
+        // $user->save();
+        // }
+
+        // $user->index = 1;
+        // $user->save();
+
+        //
+
+        // $index;
+        // $users = User::where('position_id', $position)->orderBy('index', 'asc')->get();
+        foreach ($users as $user) {
+            // dd($user['index']);
+            if ($user['index'] < 4) {
+                $index = $user['index'] + 1;
+            } else {
+                $index = 1;
+            }
+            $user['index'] = $index;
+            $user->save();
+        }
+        // dd($users);
+        // $user = User::find(Auth::user()->id);
+        // $user->index = 1;
+        // $user->save();
+    }
 }

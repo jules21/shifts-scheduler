@@ -48,7 +48,7 @@
                         @if ($user->phone)
                             <li class="list-group-item">
                                 <strong>@lang('app.phone'):</strong>
-                                <a href="telto:{{ $user->phone }}">{{ $user->phone }}</a>
+                                <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
                             </li>
                         @endif
                         <li class="list-group-item">

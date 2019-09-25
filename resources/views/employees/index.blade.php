@@ -62,6 +62,7 @@
                         <th class="min-width-80">@lang('app.username')</th>
                         <th class="min-width-150">@lang('app.full_name')</th>
                         <th class="min-width-100">@lang('app.email')</th>
+                        <th class="min-width-100">Telephone</th>
                         <th class="min-width-80">@lang('app.registration_date')</th>
                         <th class="min-width-80">@lang('Department')</th>
                         <th class="min-width-80">@lang('Post[title]')</th>

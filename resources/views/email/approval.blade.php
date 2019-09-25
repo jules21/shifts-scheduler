@@ -244,6 +244,9 @@
         border-bottom: 1px solid #f6f6f6;
         margin: 20px 0; 
       }
+      .space{
+        padding: 20px;
+      }
 
       /* -------------------------------------
           RESPONSIVE AND MOBILE FRIENDLY STYLES
@@ -358,7 +361,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td>
+                                      <td class="space">
                                            {{-- <a href="http://htmlemail.io" target="_blank">Call To Action</a> --}}
                                            here is the details about your Leave below &downdownarrows;
 {{-- exhibition Theme : {{ $data['exhibition_title'] }} --}}

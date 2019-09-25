@@ -41,12 +41,13 @@ class LeaveController extends Controller
         $leave = Leave::create([
 
             'user_id' => Auth::user()->id,
-            'day' => $request->input('day'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
             'description' => $request->input('description'),
         ]);
 
         if ($leave->save()) {
-            return redirect()->back()->with('success', 'You\'r request sent successful. you\'ll be notified when approved');
+            return redirect()->route('user.leaves.index')->with('success', 'You\'r request sent successful. you\'ll be notified when approved');
         } else {
             return redirect()->back()->with('error', 'something went wrong, Please try again');
         }
@@ -60,31 +61,32 @@ class LeaveController extends Controller
 
         $day = date('d', $timestamp);
         $pick = Calendar::where('day', $day)->where('worker', $leave->user_id)->first();
-        if ($pick->shift == 1) {
-            $leave->status = "approved";
-            $leave->save();
-            return redirect()->back()->with('success', 'that day is already off');
+        // if ($pick->shift == 1) {
+        //     $leave->status = "approved";
+        //     $leave->save();
+        //     return redirect()->back()->with('success', 'that day is already off');
+        // } else {
+        // $pick->shift == 1;
+        // if ($pick->save()) {
+        $leave->status = "approved";
+        $user = User::find($leave->user_id);
+
+        if ($leave->save()) {
+            $messages = [
+                "email" => $user->email,
+                "username" => $user->username,
+                "day" => $leave->start_date . " - " . $leave->end_date,
+                "status" => $leave->status,
+                "description" => $leave->description,
+            ];
+
+            Mail::to($user->email)->send(new LeaveMail($messages));
+            return redirect()->back()->with('success', 'request approved');
         } else {
-            $pick->shift == 1;
-            if ($pick->save()) {
-                $leave->status = "approved";
-                $user = User::find($leave->user_id);
-
-                if ($leave->save()) {
-                    $messages = [
-                        "email" => $user->email,
-                        "username" => $user->username,
-                        "day" => $leave->day,
-                        "description" => $leave->description,
-                    ];
-
-                    Mail::to($user->email)->send(new LeaveMail($messages));
-                    return redirect()->back()->with('success', 'request approved');
-                } else {
-                    return redirect()->back()->with('error', 'something went wrong, Please try again');
-                }
-            }
+            return redirect()->back()->with('error', 'something went wrong, Please try again');
         }
+        // }
+        // }
         // echo $day;
 
     }
@@ -105,7 +107,7 @@ class LeaveController extends Controller
             $messages = [
                 "email" => $user->email,
                 "username" => $user->username,
-                "day" => $leave->day,
+                "day" => $leave->start_date . " - " . $leave->end_date,
                 "description" => $leave->description,
                 "status" => $leave->status,
             ];

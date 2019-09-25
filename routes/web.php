@@ -11,6 +11,8 @@
 |
  */
 
+Route::get('user', 'ShiftsController@swapShift');
+
 Route::get('/shifts', 'ShiftsController@do')->name('shift');
 Route::get('/try', 'ShiftsController@print_timetable')->name('calendart');
 Route::get('/timetables', 'ShiftsController@real_timetable')->name('calendary');

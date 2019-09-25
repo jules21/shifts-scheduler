@@ -24,6 +24,10 @@
             <label for="last_name">Last Name</label>
             <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{ $edit ? $user->last_name : '' }}">
         </div>
+        <div class="form-group">
+            <label for="phone">Telephone</label>
+            <input type="number" class="form-control" id="phone" name="phone" placeholder="phone number" value="{{ $edit ? $user->phone : '' }}" required>
+        </div>
     </div>
 
     <div class="col-md-6">

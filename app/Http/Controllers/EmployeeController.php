@@ -56,6 +56,7 @@ class EmployeeController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'username' => 'nullable|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required',
             // 'birthday' => 'nullable|date',
             // 'department_id' => 'required',
             // 'position_id' => 'required',
@@ -76,6 +77,7 @@ class EmployeeController extends Controller
             'password' => Hash::make($request->input('password')),
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
+            'phone' => $request->input('phone'),
             'birthday' => $request->input('birthday'),
             'address' => $request->input('address'),
             'department_id' => $request->input('department_id'),
@@ -144,6 +146,7 @@ class EmployeeController extends Controller
             $user->last_name = $request->input('last_name');
             $user->birthday = $request->input('birthday');
             $user->address = $request->input('address');
+            $user->phone = $request->input('phone');
             $user->department_id = $request->input('department_id');
             $user->position_id = $request->input('position_id');
 

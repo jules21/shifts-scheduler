@@ -38,10 +38,6 @@
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="user_id" value="{{$leave->user_id}} ">
                             <div class="form-group">
-                                <label for="date">Date</label>
-                                <input type="date" name="day" id="date" class="form-control" value="{{$leave->day}}" readonly required>
-                            </div>
-                            <div class="form-group">
                                 <label for="reason">reason</label>
                                 <textarea name="description" id="reason"  class="form-control">
                                     

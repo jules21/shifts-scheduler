@@ -46,7 +46,8 @@
                     <tr>
                         <th class="min-width-150">Email</th>
                         <th class="min-width-150">username</th>
-                        <th class="min-width-150">Date</th>
+                        <th class="min-width-150">Start Date</th>
+                        <th class="min-width-150">End Date</th>
                         <th>Reasom</th>
                         <th class="">status</th>
                         <th class="text-center">action</th>
@@ -58,7 +59,8 @@
                                 <tr>
                                     <td>{{ $leave->user->email }}</td>
                                     <td>{{ $leave->user->username }}</td>
-                                    <td>{{ $leave->day }}</td>
+                                    <td>{{ $leave->start_date }}</td>
+                                    <td>{{ $leave->end_date }}</td>
                                     <td>
                                         {{ $leave->description }}
                                     </td>

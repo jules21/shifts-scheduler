@@ -107,7 +107,7 @@
                 <a href="{{ route('user.leaves.index') }}" aria-expanded="true">
                 <i class="metismenu-icon pe-7s-diamond"></i>
                 Leaves
-                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                {{-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> --}}
                 </a>
              </li>
              {{-- Time table links --}}
@@ -155,12 +155,12 @@
              </li>
 
              {{-- Timetable links --}}
-             <li class="mm-active">
+             {{-- <li class="mm-active">
                 <a href="#" aria-expanded="true">
                 <i class="metismenu-icon pe-7s-diamond"></i>
                 Shift switching
                 </a>
-             </li>
+             </li> --}}
 
              {{-- Leave links --}}
              <li class="mm-active">

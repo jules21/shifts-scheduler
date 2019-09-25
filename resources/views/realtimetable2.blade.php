@@ -150,7 +150,8 @@
                                 if ($dayOfWeek != 7) {
 
                                     $remainingDays = 7 - $dayOfWeek;
-                                    $calendar .= "<td colspan='$remainingDays'>&nbsp;</td>";
+                                        // $calendar .= "<td colspan='$remainingDays'>&nbsp;</td>";
+                                        // App\Http\Controllers\ShiftsController::swapShift(\App\User::where('index',$worker['worker'])->where('position_id', $position_id)->value('index'), $position_id); 
 
                                 }
 

@@ -34,9 +34,15 @@
                         <h5 class="card-title">Leave Form</h5>
                         <form action="{{ route('user.leaves.store') }}" method="POST">
                             @csrf
-                            <div class="form-group">
-                                <label for="date">Date</label>
-                                <input type="date" name="day" id="date" class="form-control" required>
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <label for="start_date">Start Date</label>
+                                    <input type="date" name="start_date" id="start_date" class="form-control" min="{{date('Y-m-d')}}" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="end_date">End Date</label>
+                                    <input type="date" name="end_date" id="end_date"  min="{{date('Y-m-d')}}" class="form-control" required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="reason">reason</label>
