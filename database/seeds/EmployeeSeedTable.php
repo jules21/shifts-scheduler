@@ -14,7 +14,7 @@ class EmployeeSeedTable extends Seeder
     {
         $users =
             [
-            ['id' => '4', 'username' => 'Manager', 'email' => 'manager@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '1', 'department_id' => '1', 'position_id' => '1'],
+            ['id' => '4', 'username' => 'Manager', 'email' => 'manager@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '1', 'department_id' => '100', 'position_id' => '100'],
 
             ['id' => '2', 'username' => 'employee', 'email' => 'employee@mrhotel.rw', 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'role_id' => '2', 'department_id' => '2', 'position_id' => '3'
                 , 'index' => '1'],

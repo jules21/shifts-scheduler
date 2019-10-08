@@ -118,13 +118,13 @@
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                     <ul class="mm-collapse mm-show" style="">
-                        <li>
+                        {{-- <li>
                            <a href="{{ route('manager.calendary') }}">
                                  <i class="metismenu-icon"></i>
                                  timetable
                               </a>
                            </li>
-                        <li>
+                        <li> --}}
                            <a href="{{ route('choose.department') }}">
                            <i class="metismenu-icon"></i>
                            Choose Department
@@ -179,6 +179,28 @@
                      <li>
                         <a href="{{ route('user.leaves.index') }}">
                         <i class="metismenu-icon"></i>view leave status
+                        </a>
+                     </li>
+  
+                  </ul>
+               </li>
+             {{-- Leave links --}}
+             <li class="mm-active">
+                  <a href="#" aria-expanded="true">
+                  <i class="metismenu-icon pe-7s-diamond"></i>
+                  Swap request
+                  <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                  </a>
+                  <ul class="mm-collapse mm-show" style="">
+                     <li>
+                        <a href="{{ route('user.swaps.create') }}">
+                        <i class="metismenu-icon"></i>
+                        make request
+                        </a>
+                     </li>
+                     <li>
+                        <a href="{{ route('user.swaps.index') }}">
+                        <i class="metismenu-icon"></i>view swap status
                         </a>
                      </li>
   

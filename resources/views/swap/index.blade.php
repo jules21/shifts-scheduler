@@ -15,7 +15,7 @@
                         <i class="metismenu-icon pe-7s-display2"></i>
                 </i>
             </div>
-            <div>Requested Leaves
+            <div>Requested Swap(Switch Shifts)
                 <div class="page-title-subheading">
                 </div>
                 
@@ -44,12 +44,11 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-150">Email</th>
-                        <th class="min-width-150">username</th>
-                        <th class="min-width-150">Start Date</th>
-                        <th class="min-width-150">End Date</th>
-                        <th>Reasom</th>
-                        <th class="">status</th>
+                        <th class="min-width-150">email</th>
+                        <th class="min-width-150">employee(who Requested)</th>
+                        <th class="min-width-150">date(switch)</th>
+                        <th class="min-width-150">date(payback)</th>
+                        <th class="min-width-150">status</th>
                         <th class="text-center">action</th>
                     </tr>
                     </thead>
@@ -58,28 +57,25 @@
                             @foreach ($leaves as $leave)
                                 <tr>
                                     <td>{{ $leave->user['email'] }}</td>
-                                    <td>{{ $leave->user['username'] }}</td>
-                                    <td>{{ $leave->start_date }}</td>
-                                    <td>{{ $leave->end_date }}</td>
-                                    <td>
-                                        {{ $leave->description }}
-                                    </td>
+                                    <td>{{ \App\User::where('id', $leave->swapper)->value('email')  }}</td>
+                                    <td>{{ $leave->date }}</td>
+                                    <td>{{ $leave->edate }}</td>
                                     <td>
                                         {{ $leave->status }}
                                     </td>
                                     <td class="text-center">
-                                        @if (Auth::user()->role_id == 1)
-                                        <a href="{{ route('user.leaves.show', $leave->id) }}" class="btn btn-icon"
-                                                title="approve leave" data-toggle="tooltip" data-placement="top">
+                                        @if (Auth::user()->id == $leave->swapper )
+                                        <a href="{{ route('user.swaps.show', $leave->id) }}" class="btn btn-icon"
+                                                title="approve swap" data-toggle="tooltip" data-placement="top">
                                                  <i class="fas fa-check"></i>
                                              </a>
-                                        <a href="{{ route('user.leaves.edit', $leave->id) }}" class="btn btn-icon"
-                                                title="cancel leave" data-toggle="tooltip" data-placement="top">
+                                        <a href="{{ route('user.swaps.update', $leave->id) }}" class="btn btn-icon"
+                                                title="cancel swap" data-toggle="tooltip" data-placement="top">
                                                  <i class="fas fa-times"></i>
                                              </a>
                                         @endif
                                   
-    <form action="{{ route('user.leaves.destroy', $leave->id) }}" method="post" class="d-inline">
+    <form action="{{ route('user.swaps.destroy', $leave->id) }}" method="post" class="d-inline">
             @csrf
             <input name="_method" type="hidden" value="DELETE">
     <button

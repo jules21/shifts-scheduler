@@ -20,6 +20,7 @@
                 <div class="col-md-4 mt-md-0 mt-2">
                     <div class="input-group custom-search-form">
                         <input type="text"
+                               id="myInputTextField"
                                class="form-control input-solid"
                                name="search"
                                autocomplete="off" 
@@ -34,9 +35,9 @@
                                         <i class="fas fa-times"></i>
                                     </a>
                                 @endif
-                                <button class="btn btn-light" type="submit" id="search-users-btn">
+                                {{-- <button class="btn btn-light" type="submit" id="search-users-btn">
                                     <i class="fas fa-search text-muted"></i>
-                                </button>
+                                </button> --}}
                             </span>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
         </form>
 
         <div class="table-responsive" id="users-table-wrapper">
-            <table class="table table-striped table-borderless">
+            <table class="table table-striped table-borderless" id="myTable">
                 <thead>
                 <tr>
                     <th class="min-width-150">Departments</th>

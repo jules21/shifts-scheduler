@@ -11,11 +11,22 @@
 |
  */
 
+Route::get('/', function () {
+    if (Auth::check()) {
+        if (Auth::user()->role->name == 'manager') {
+            return redirect('/manager/dashboard');
+        } else {
+            return redirect('/user/dashboard');
+        }
+    }
+    return view('welcome');
+});
+
 Route::get('user', 'ShiftsController@swapShift');
 
 Route::get('/shifts', 'ShiftsController@do')->name('shift');
 Route::get('/try', 'ShiftsController@print_timetable')->name('calendart');
-Route::get('/timetables', 'ShiftsController@real_timetable')->name('calendary');
+Route::get('/timetables', 'ShiftsController@userTimetable')->name('calendary');
 
 Route::get('/calendar', 'ShiftsController@build_calendar')->name('calendar');
 Route::get('/go', 'ShiftsController@doCalendars')->name('calendarr');
@@ -27,16 +38,6 @@ Route::post('/employee', 'ShiftsController@getUser')->name('gentimetable');
 
 Route::get('/admin', function () {
     return view('layouts.master');
-});
-Route::get('/', function () {
-    if (Auth::check()) {
-        if (Auth::user()->role->name == 'manager') {
-            return redirect('/manager/dashboard');
-        } else {
-            return redirect('/user/dashboard');
-        }
-    }
-    return view('welcome');
 });
 Route::get('states/get/{id}', 'EmployeeController@getMembership');
 
@@ -54,6 +55,8 @@ Route::group(['as' => 'manager.', 'prefix' => 'manager', 'middleware' => 'auth']
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@userDashboard')->name('dashboard');
     Route::resource('leaves', 'LeaveController');
+    Route::resource('swaps', 'SwapController');
+    // Route::post('swaps', 'SwapController@canceled')->name('swaps.canceled');
     Route::resource('switch-shifts', 'SwitchSHiftController');
 });
 

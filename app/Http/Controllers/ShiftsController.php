@@ -7,6 +7,7 @@ use App\TimeTable;
 use App\User;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShiftsController extends Controller
 {
@@ -376,11 +377,15 @@ class ShiftsController extends Controller
 
         $dateComponents = getdate();
 
-        $month = $dateComponents['mon'];
-        $year = $dateComponents['year'];
+        // $month = $dateComponents['mon'];
+        // $year = $dateComponents['year'];
+
+        $ex = explode('-', $request->month);
+        $month = $ex[1];
+        $year = $ex[0];
 
         // Create array containing abbreviations of days of week.
-        $daysOfWeek = array('S', 'M', 'T', 'W', 'T', 'F', 'S');
+        $daysOfWeek = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 
         // What is the first day of the month in question?
         $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
@@ -453,5 +458,63 @@ class ShiftsController extends Controller
         // $user = User::find(Auth::user()->id);
         // $user->index = 1;
         // $user->save();
+    }
+    public function userTimetable(Request $request)
+    {
+        $this->print_timetable();
+
+        $assigned = DB::table('time_tables')->get();
+        // $array = json_decode(json_encode($assigned), true);
+        $array = TimeTable::all();
+
+        $dateComponents = getdate();
+
+        // $month = $dateComponents['mon'];
+        // $year = $dateComponents['year'];
+
+        $ex = explode('-', $request->month);
+        $month = 10;
+        $year = 2019;
+
+        $positioni = Auth::user()->position->id;
+
+        // dd($positioni);
+
+        // Create array containing abbreviations of days of week.
+        $daysOfWeek = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+
+        // What is the first day of the month in question?
+        $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
+
+        // How many days does this month contain?
+        $numberDays = date('t', $firstDayOfMonth);
+
+        // Retrieve some information about the first day of the
+        // month in question.
+        $dateComponents = getdate($firstDayOfMonth);
+
+        // What is the name of the month in question?
+        $monthName = $dateComponents['month'];
+
+        // What is the index value (0-6) of the first day of the
+        // month in question.
+        $dayOfWeek = $dateComponents['wday'];
+
+        $currentDay = 1;
+
+        return view('realtimetable2',
+            [
+                'array' => $array,
+                'month' => $month,
+                'year' => $year,
+                'daysOfWeek' => $daysOfWeek,
+                'firstDayOfMonth' => $firstDayOfMonth,
+                'numberDays' => $numberDays,
+                'dateComponents' => $dateComponents,
+                'monthName' => $monthName,
+                'dayOfWeek' => $dayOfWeek,
+                'currentDay' => $currentDay,
+                'position_id' => $positioni,
+            ]);
     }
 }

@@ -108,7 +108,7 @@ class LeaveController extends Controller
                 "email" => $user->email,
                 "username" => $user->username,
                 "day" => $leave->start_date . " - " . $leave->end_date,
-                "description" => $leave->description,
+                "description" => $leave->reason,
                 "status" => $leave->status,
             ];
 

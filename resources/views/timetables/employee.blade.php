@@ -30,7 +30,7 @@
     <form action="{{ route('gentimetable') }}" method="POST">
         @csrf
             <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="role">Department</label>
                             <select class="form-control @error('department_id') is-invalid @enderror" id="category" name="department_id" aria-invalid="false" aria-describedby="roles-error" required>
@@ -48,7 +48,7 @@
                       
                     </div>
                 
-                    <div class="col-md-4">         
+                    <div class="col-md-3">         
                         <div class="form-group">
                             <label for="status">Post[position]</label>
                             <select class="form-control @error('position_id') is-invalid @enderror" id="membership" name="position_id" required>
@@ -65,7 +65,13 @@
                         </div>
                   
                     </div>
-                    <div class="col-md-4 mt-4">
+                    <div class="col-md-3">         
+                            <div class="form-group">
+                                <label for="status">Pick month</label>
+                                <input type="month" name="month" id="month" class="form-control" required>
+                            </div>
+                    </div>
+                    <div class="col-md-3 mt-4">
                         <button type="submit" class="btn btn-dark">generate</button>
                     </div>
                 </div>

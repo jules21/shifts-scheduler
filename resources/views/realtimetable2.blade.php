@@ -21,7 +21,7 @@
             @endif Dashboard
                 <div class="page-title-subheading">
                         <p>
-                                M stands for morning |    E stands for evening |    N stands for noon
+                        M stands for morning |    E stands for evening |    N stands for noon |    O stands for Off
                             </p>
                 </div>
                 
@@ -41,7 +41,11 @@
             
                 {{-- Create the table tag opener and day headers --}}
                 <table class="table table-bordered table-hover table-striped">
-                    <H1 class='text-center p-4'>2019 Schedule</H1>
+                    {{-- <H1 class='text-center p-4'>2019 Schedule</H1> --}}
+                    <H1 class='text-center pt-4 text-primary'>Monthly Employee Shift Schedule</H1>
+                    <h4 class='text-center pb-4'>
+                        {{\App\Position::find($position_id)->department->name}} Department | {{$month}}-{{$year}}
+                        </h4>
                      {{-- Create the calendar headers --}}
                         <thead>
                             <tr>
@@ -68,7 +72,7 @@
                             }
 
                             $month = str_pad($month, 2, "0", STR_PAD_LEFT);
-
+                            $inc = 0;
                             while ($currentDay <= $numberDays) {
 
                                 // Seventh column (Saturday) reached. Start a new row.
@@ -77,7 +81,7 @@
 
                                     $dayOfWeek = 0;
                                     $calendar .= "</tr><tr>";
-
+                                    $inc ++;
                                 }
 
                                 $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
@@ -126,7 +130,48 @@
                                         // echo $worker['worker'].":".$shift['shift']."<br>";
                                         // $calendar .= $worker['worker'] . " : " . $shift['shift'] . "<br>";
                                         // $calendar .=\App\User::find($worker['worker'])->username. " : " . \App\Shift::find($shift['shift'])->abbr . "<br>";
-                                        $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::where('index',$worker['worker'])->where('position_id', $position_id)->value('username') . "<br>";
+                                        $workerInc = $worker['worker'] + $inc;
+                                        if($workerInc > 4){
+                                            $workerInc -= 4;
+                                        }
+                                        $userId =\App\User::where('index',$workerInc)->where('position_id', $position_id)->value('id');
+                                        $start_date = \App\Leave::where('user_id', $userId)->where('status', 'approved')->value('start_date');
+                                        $end_date = \App\Leave::where('user_id', $userId)->where('status', 'approved')->value('end_date'); 
+
+                                        $swap = \App\Swap::where('user_id', $userId)->value('date');
+                                        $swapper = \App\Swap::where('user_id', $userId)->value('swapper');
+                                        $swap_day = intval(substr($swap, strrpos($swap, '-') + 1));
+                                        
+
+                                        $date = $start_date;
+                                        $d1 = substr($date, strrpos($date, '-') + 1);
+                                        
+                                        $date = $end_date;
+                                        $d2 = substr($date, strrpos($date, '-') + 1);
+                                        $leave_days = array();
+                                        
+                                        for ($i=(int)$d1; $i <= (int)$d2; $i++) { 
+                                            array_push($leave_days,$i);
+                                        }
+                                        if($leave_days != []){
+                                            if(in_array($currentDay,$leave_days)){
+                                                $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " .\App\Leavereplacement::where('user_id', $userId)->value('name'). "<br>";  
+                                            }
+                                            elseif (!empty($swap_day)) {
+                                                if($swap_day === $currentDay){
+                                                    $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " .\App\User::where('id', $swapper)->value('username'). "<br>";  
+                                                }
+                                                else{
+                                                    $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::where('index',$workerInc)->where('position_id', $position_id)->value('username') . "<br>";
+                                                }
+                                            }
+                                            else{
+                                                $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::where('index',$workerInc)->where('position_id', $position_id)->value('username') . "<br>";  
+                                            }
+                                        }
+                                        else{
+                                            $calendar .=\App\Shift::find($shift['shift'])->abbr. " : " . \App\User::where('index',$workerInc)->where('position_id', $position_id)->value('username') . "<br>";
+                                        }   
                                     }
                                 }
                                 // end here
