@@ -20,6 +20,8 @@ class CreateSwapsTable extends Migration
             $table->date('date');
             $table->date('edate');
             $table->string('status')->default('pending');
+            $table->string('right')->default('denial');
+            $table->string('slug')->default('1');
             $table->timestamps();
         });
     }

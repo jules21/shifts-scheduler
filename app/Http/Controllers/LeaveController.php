@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Calendar;
 use App\Leave;
+use App\Leavereplacement;
 use App\Mail\LeaveMail;
 use App\User;
 use Auth;
@@ -70,7 +71,12 @@ class LeaveController extends Controller
         // if ($pick->save()) {
         $leave->status = "approved";
         $user = User::find($leave->user_id);
-
+        //
+        Leavereplacement::create([
+            'user_id' => $leave->user_id,
+            'name' => 'replacement',
+        ]);
+        //
         if ($leave->save()) {
             $messages = [
                 "email" => $user->email,

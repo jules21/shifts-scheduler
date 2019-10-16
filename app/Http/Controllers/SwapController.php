@@ -47,12 +47,15 @@ class SwapController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $slug = uniqid();
         $leave1 = Swap::create([
 
             'user_id' => Auth::user()->id,
             'swapper' => $request->input('swapper'),
             'date' => $request->input('start_date'),
             'edate' => $request->input('end_date'),
+            'right' => 'denial',
+            'slug' => $slug
         ]);
         $leave = Swap::create([
 
@@ -60,6 +63,8 @@ class SwapController extends Controller
             'user_id' => $request->input('swapper'),
             'date' => $request->input('start_date'),
             'edate' => $request->input('end_date'),
+            'right' => 'approval',
+            'slug' => $slug,
         ]);
 
         if ($leave->save()) {
@@ -73,32 +78,45 @@ class SwapController extends Controller
     {
         $leave = Swap::find($id);
         // dd($leave->day);
-        $leave->status = "approved";
-        $user = User::find($leave->user_id);
-
-        if ($leave->save()) {
-            return redirect()->back()->with('success', 'request approved');
-        } else {
-            return redirect()->back()->with('error', 'something went wrong, Please try again');
+        $slug = Swap::where('slug', $leave->slug)->get();
+        foreach ($slug as $swap) {
+            $swap->status = "approved";
+            $swap->save();
         }
+        return redirect()->back()->with('success', 'request approved');
+        // $leave->status = "approved";
+        // $user = User::find($leave->user_id);
+
+        // if ($leave->save()) {
+            // return redirect()->back()->with('success', 'request approved');
+        // } else {
+        //     return redirect()->back()->with('error', 'something went wrong, Please try again');
+        // }
         // }
         // }
         // echo $day;
 
     }
 
-    public function canceled($id)
+    public function edit($id)
     {
-        dd($id);
+        // dd($id);
         $leave = Swap::find($id);
-        $leave->status = "cancelled";
-        $user = User::find($leave->user_id);
 
-        if ($leave->save()) {
-            return redirect()->back()->with('success', 'request Cancelled');
-        } else {
-            return redirect()->back()->with('error', 'something went wrong, Please try again');
+        $slug = Swap::where('slug', $leave->slug)->get();
+        foreach ($slug as $swap) {
+            $swap->status = "cancelled";
+            $swap->save();
         }
+        return redirect()->back()->with('success', 'request Cancelled');
+        // $leave->status = "cancelled";
+        // $user = User::find($leave->user_id);
+
+        // if ($leave->save()) {
+            // return redirect()->back()->with('success', 'request Cancelled');
+        // } else {
+            // return redirect()->back()->with('error', 'something went wrong, Please try again');
+        // }
     }
 
     /**
@@ -130,12 +148,15 @@ class SwapController extends Controller
      */
     public function destroy($id)
     {
-        $delUser = Swap::find($id);
 
-        if ($delUser->delete()) {
-            return redirect()->route('user.swaps.index')->with('success', 'request deleted Successful');
-        } else {
-            return back()->withInput();
+        $leave = Swap::find($id);
+        // dd($leave->day);
+        $slug = Swap::where('slug', $leave->slug)->get();
+        foreach ($slug as $swap) {
+            $swap->delete();
         }
+
+            return redirect()->route('user.swaps.index')->with('success', 'request deleted Successful');
+
     }
 }

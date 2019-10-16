@@ -138,8 +138,8 @@
                                         $start_date = \App\Leave::where('user_id', $userId)->where('status', 'approved')->value('start_date');
                                         $end_date = \App\Leave::where('user_id', $userId)->where('status', 'approved')->value('end_date'); 
 
-                                        $swap = \App\Swap::where('user_id', $userId)->value('date');
-                                        $swapper = \App\Swap::where('user_id', $userId)->value('swapper');
+                                        $swap = \App\Swap::where('user_id', $userId)->where('status', 'approved')->value('date');
+                                        $swapper = \App\Swap::where('user_id', $userId)->where('status', 'approved')->value('swapper');
                                         $swap_day = intval(substr($swap, strrpos($swap, '-') + 1));
                                         
 

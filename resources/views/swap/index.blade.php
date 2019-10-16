@@ -64,12 +64,12 @@
                                         {{ $leave->status }}
                                     </td>
                                     <td class="text-center">
-                                        @if (Auth::user()->id == $leave->swapper )
+                                        @if ($leave->right == 'approval' )
                                         <a href="{{ route('user.swaps.show', $leave->id) }}" class="btn btn-icon"
                                                 title="approve swap" data-toggle="tooltip" data-placement="top">
                                                  <i class="fas fa-check"></i>
                                              </a>
-                                        <a href="{{ route('user.swaps.update', $leave->id) }}" class="btn btn-icon"
+                                        <a href="{{ route('user.swaps.edit', $leave->id) }}" class="btn btn-icon"
                                                 title="cancel swap" data-toggle="tooltip" data-placement="top">
                                                  <i class="fas fa-times"></i>
                                              </a>
